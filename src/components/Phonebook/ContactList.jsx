@@ -1,16 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types'; // ES6
-import { Button } from './Phonebook.styled';
+import ContactListItem from './ContactListItem';
 
 function ContactList({ users, onDelete }) {
   return (
     <ul>
       {users.map(({ id, name, number }) => {
         return (
-          <li key={id}>
-            {`${name}: ${number}`}
-            <Button onClick={() => onDelete(id)}>Delete contact</Button>
-          </li>
+          <ContactListItem
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            onDelete={onDelete}
+          />
         );
       })}
     </ul>

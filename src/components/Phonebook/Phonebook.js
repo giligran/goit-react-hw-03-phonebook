@@ -14,6 +14,24 @@ class Phonebook extends React.Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const savedContacts = JSON.parse(localStorage.getItem('state'));
+    if (savedContacts) {
+      this.setState({
+        contacts: savedContacts,
+      });
+    } else {
+      console.log('localStorage is empty');
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('state', JSON.stringify(this.state.contacts));
+      console.log('Обновилось');
+    }
+  }
+
   formSubmitHandler = data => {
     const { contacts } = this.state;
     const { name } = data;
